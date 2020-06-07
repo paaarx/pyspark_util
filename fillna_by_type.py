@@ -11,6 +11,9 @@ def fillna_by_type(df, string_fill, number_fill, date_fill):
 
     Parameters:
         df (DataFrame): The DataFrame to be analyzed.
+        string_fill (String): Value to fill.
+        number_fill (Int): Value to fill.
+        date_fill (Date): Value to fill.
 
     Returns:
         DataFrame: DataFrame with columns and null count.
