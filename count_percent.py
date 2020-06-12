@@ -3,14 +3,18 @@ from pyspark.sql.functions import count, col
 from pyspark.sql.window import Window
 
 
-def count_percent(df, column):
+def count_percent(df, column, ascending=False):
     """
+    Returns a sorted DataFrame with values count and percent of each value.
+
     https://github.com/paaarx
-    Returns a DataFrame with values count and percent of each value.
-    The output count colunm is 'count' and percent is 'percent'.
+    The DataFrame is sorted by value count.
+
     Parameters:
         df (DataFrame): The DataFrame to be analyzed.
-        column (String): The DataFrame column to be analyzed.
+        column (str): The DataFrame column to be analyzed.
+        ascending (bool): Sort the DataFrame by value count (default False).
+
     Returns:
         DataFrame: DataFrame with three columns, first column is the original
         column from column parameter, second is 'count', the count from values
@@ -27,6 +31,6 @@ def count_percent(df, column):
         .withColumn('percent',
                     f.round(((f.col('count') / f.sum('count')
                               .over(Window.partitionBy())) * 100), 2)) \
-        .orderBy('count', ascending=False)
+        .orderBy('count', ascending=ascending)
 
     return df
