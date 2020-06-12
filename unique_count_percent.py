@@ -3,7 +3,7 @@ from pyspark.sql.functions import count, col
 from pyspark.sql.window import Window
 
 
-def count_percent(df, column, ascending=False):
+def unique_count_percent(df, column, ascending=False):
     """
     Returns a sorted DataFrame with values count and percent of each value.
 
